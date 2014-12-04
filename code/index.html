@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charse="utf-8">
+    <title>Backbone/Marionette test app</title>
+    <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
+  </head>
+
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <span class="brand">Contact Manage</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="main" class="container"></div>
+
+    <ul id="main-list"></ul>
+
+    <script type="text/template" id="static-template">
+      <p>Static template from marionette.</p>
+    </script>
+
+    <script type="text/template" id="contact-list-item">
+      <%- firstName %> <%- lastName %>
+    </script>
+
+    <script data-main="assets/js/main" src="./assets/js/vendor/require.js"></script>
+
+  </body>
+</html>
