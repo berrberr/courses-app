@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div id="main" class="container"></div>
+    <div id="main-region" class="container"></div>
 
     <ul id="main-list"></ul>
 
@@ -27,7 +27,39 @@
       <%- firstName %> <%- lastName %>
     </script>
 
-    <script data-main="assets/js/main" src="./assets/js/vendor/require.js"></script>
+    <script src="./assets/js/vendor/jquery.js"></script>
+    <script src="./assets/js/vendor/underscore.js"></script>
+    <script src="./assets/js/vendor/json2.js"></script>
+    <script src="./assets/js/vendor/backbone.js"></script>
+    <script src="./assets/js/vendor/backbone.marionette.js"></script>
+
+    <script src="./assets/js/app.js"></script>
+    <script src="./assets/js/entities/contact.js"></script>
+
+    <script type="text/javascript">
+      ContactManager.ContactItemView = Marionette.ItemView.extend({
+        tagName: "li",
+        template: "#contact-list-item"
+      });
+
+      ContactManager.ContactsView = Marionette.CollectionView.extend({
+        tagName: "ul",
+        childView: ContactManager.ContactItemView
+      });
+
+      ContactManager.on("start", function() {
+        var contacts = ContactManager.request("contact:entities");
+        console.log(contacts);
+
+        var contactListView = new ContactManager.ContactsView({
+          collection: contacts
+        });
+
+        ContactManager.mainRegion.show(contactListView);
+      });
+
+      ContactManager.start();
+    </script>
 
   </body>
 </html>
