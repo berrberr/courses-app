@@ -1,11 +1,50 @@
-ContactManager.module("ContactsApp.List", function(List, ContactManager, Backbone, Marionette, $, _) {
+ContactManager.module("ContactsApp.List", function(List, ContactManager, 
+Backbone, Marionette, $, _) {
   List.Contact = Marionette.ItemView.extend({
-    tagName: "li",
-    template: "#contact-list-item"
+    tagName: "tr",
+    template: "#contact-list-item",
+
+    events: {
+      "click": "highlightName",
+      "click td button.js-show": "showClicked",
+      "click td button.js-delete": "deleteClicked"
+    },
+
+    highlightName: function(e) {
+      this.$el.toggleClass("warning");
+      this.trigger("contact:logInfo", this.model);
+    },
+
+    showClicked: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.trigger("contact:show", this.model);
+    },
+
+    deleteClicked: function(e) {
+      e.stopPropagation();
+      this.trigger("contact:delete", this.model);
+    },
+
+    remove: function() {
+      var self = this;
+      this.$el.fadeOut(function() {
+        Marionette.ItemView.prototype.remove.call(self);
+      });
+    }
   });
 
-  List.Contacts = Marionette.CollectionView.extend({
-    tagName: "ul",
-    childView: List.Contact
+  List.Contacts = Marionette.CompositeView.extend({
+    tagName: "table",
+    className: "table table-hover",
+    template: "#contact-list",
+    childView: List.Contact,
+    childViewContainer: "tbody",
+
+    onChildviewContactDelete: function() {
+      this.$el.fadeOut(1000, function() {
+        $(this).fadeIn(1000);
+      });
+    }
   });
 });

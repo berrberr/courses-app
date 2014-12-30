@@ -19,11 +19,6 @@ module.exports = function(grunt) {
           cwd: "bower_components/bootstrap-sass-official/assets/stylesheets/",
           src: ["**/*.scss"],
           dest: "code/assets/sass/vendor"
-        }, {
-          expand: true,
-          cwd: "bower_components/bootstrap-sass-official/assets/fonts/",
-          src: ["*"],
-          dest: "code/assets/fonts"
         } ]
       }
     },
@@ -52,24 +47,24 @@ module.exports = function(grunt) {
           "underscore.js": "underscore/underscore.js",
           "json2.js": "json2/json2.js",
           "backbone.js": "backbone/backbone.js",
-          "backbone.marionette.js": "marionette/lib/backbone.marionette.js"
+          "backbone.marionette.js": "marionette/lib/backbone.marionette.js",
+          "bootstrap.js": "bootstrap-sass-official/assets/javascripts/bootstrap.js"
         }
       },
       sass: {
-        options: {
-          destPrefix: "code/assets/sass/vendor/"
-        },
-        files: {
-          "bootstrap": "bootstrap-sass-official/assets/stylesheets/*"
-        }
+        options: { destPrefix: "code/assets/sass/vendor/" },
+        files: { "bootstrap": "bootstrap-sass-official/assets/stylesheets/*" }
+      },
+      fonts: {
+        options: { destPrefix: "code/assets/fonts/vendor/" },
+        files: { "bootstrap": "bootstrap-sass-official/assets/fonts/bootstrap/*" }
       }
     },
 
     jshint: {
       all: jsFiles,
       options: {
-        jshintrc: true,
-        reporter: require("jshint-stylish")
+        jshintrc: true
       }
     },
 
@@ -97,6 +92,7 @@ module.exports = function(grunt) {
     }
   });
 
+  grunt.registerTask("init", ["bowercopy"]);
   grunt.registerTask("lint", ["jshint", "lintspaces"]);
-  grunt.registerTask("dev", ["jshint", "lintspaces", "clean", "bowercopy", "sass", "copy"]);
+  grunt.registerTask("dev", ["jshint", "lintspaces", "clean", "sass", "copy"]);
 };

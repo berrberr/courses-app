@@ -8,23 +8,61 @@
 
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <span class="brand">Contact Manage</span>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Contact Manage</a>
+        </div>
+
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Test link</a></li>
+            <li><a href="#">Test link 2</a></li>
+          </ul>
         </div>
       </div>
     </div>
 
     <div id="main-region" class="container"></div>
+    <div id="summary-region" class="container"></div>
 
-    <ul id="main-list"></ul>
+    <script type="text/template" id="missing-contact-view">
+      <h1>Error</h1>
+      <div class="alert alert-danger">This contact was not found.</div>
+    </script>
 
-    <script type="text/template" id="static-template">
-      <p>Static template from marionette.</p>
+    <script type="text/template" id="contact-view">
+      <h1><%- firstName %> <%- lastName %></h1>
+      <p><strong>Phone number: </strong> <%- phoneNumber %></p>
+      <p><a href="#contacts" class="js-back">Back to contact list.</a></p>
+    </script>
+
+    <script type="text/template" id="contact-list">
+      <thead>
+        <tr><th>First Name</th><th>Last Name</th><th></th></tr>
+      </thead>
+      <tbody>
+      </tbody>
     </script>
 
     <script type="text/template" id="contact-list-item">
-      <%- firstName %> <%- lastName %>
+      <td><%- firstName %></td>
+      <td><%- lastName %></td>
+      <td>
+        <a href="#contacts/<%- id %>" class="btn btn-info js-show">
+          <i class="glyphicon glyphicon-eye-open"></i>
+          Show
+        </a>
+        <button class="btn btn-danger js-delete">
+          <i class="glyphicon glyphicon-remove"></i>
+          Delete
+        </button>
+      </td>
     </script>
 
     <script src="./assets/js/vendor/jquery.js"></script>
@@ -32,32 +70,19 @@
     <script src="./assets/js/vendor/json2.js"></script>
     <script src="./assets/js/vendor/backbone.js"></script>
     <script src="./assets/js/vendor/backbone.marionette.js"></script>
+    <script src="./assets/js/vendor/bootstrap.js"></script>
+
 
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/entities/contact.js"></script>
+    <script src="./assets/js/apps/config/storage/localstorage.js"></script>
+    <script src="./assets/js/apps/contacts/contacts_app.js"></script>
+    <script src="./assets/js/apps/contacts/list/list_view.js"></script>
+    <script src="./assets/js/apps/contacts/list/list_controller.js"></script>
+    <script src="./assets/js/apps/contacts/show/show_view.js"></script>
+    <script src="./assets/js/apps/contacts/show/show_controller.js"></script>
 
     <script type="text/javascript">
-      ContactManager.ContactItemView = Marionette.ItemView.extend({
-        tagName: "li",
-        template: "#contact-list-item"
-      });
-
-      ContactManager.ContactsView = Marionette.CollectionView.extend({
-        tagName: "ul",
-        childView: ContactManager.ContactItemView
-      });
-
-      ContactManager.on("start", function() {
-        var contacts = ContactManager.request("contact:entities");
-        console.log(contacts);
-
-        var contactListView = new ContactManager.ContactsView({
-          collection: contacts
-        });
-
-        ContactManager.mainRegion.show(contactListView);
-      });
-
       ContactManager.start();
     </script>
 
