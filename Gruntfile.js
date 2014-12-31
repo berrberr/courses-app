@@ -47,8 +47,10 @@ module.exports = function(grunt) {
           "underscore.js": "underscore/underscore.js",
           "json2.js": "json2/json2.js",
           "backbone.js": "backbone/backbone.js",
+          "backbone.localStorage.js": "Backbone.localStorage/backbone.localStorage.js",
           "backbone.marionette.js": "marionette/lib/backbone.marionette.js",
-          "bootstrap.js": "bootstrap-sass-official/assets/javascripts/bootstrap.js"
+          "bootstrap.js": "bootstrap-sass-official/assets/javascripts/bootstrap.js",
+          "spin.js": "spin.js/spin.js"
         }
       },
       sass: {

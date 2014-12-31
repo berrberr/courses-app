@@ -1,4 +1,4 @@
-ContactManager.module("ContactsApp.List", function(List, ContactManager, 
+ContactManager.module("ContactsApp.List", function(List, ContactManager,
 Backbone, Marionette, $, _) {
   List.Contact = Marionette.ItemView.extend({
     tagName: "tr",
@@ -42,8 +42,8 @@ Backbone, Marionette, $, _) {
     childViewContainer: "tbody",
 
     onChildviewContactDelete: function() {
-      this.$el.fadeOut(1000, function() {
-        $(this).fadeIn(1000);
+      this.$el.fadeOut(100, function() {
+        $(this).fadeIn(100);
       });
     }
   });

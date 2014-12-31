@@ -16,12 +16,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Contact Manage</a>
+          <a class="navbar-brand" href="index.html">Contact Manager</a>
         </div>
 
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Test link</a></li>
+            <li class="active"><a href="index.html">Test link</a></li>
             <li><a href="#">Test link 2</a></li>
           </ul>
         </div>
@@ -65,17 +65,24 @@
       </td>
     </script>
 
+    <script type="text/template" id="loading-view">
+      <div id="spinner" style="position: fixed; left: 50%; top: 30%;"></div>
+    </script>
+
     <script src="./assets/js/vendor/jquery.js"></script>
     <script src="./assets/js/vendor/underscore.js"></script>
     <script src="./assets/js/vendor/json2.js"></script>
     <script src="./assets/js/vendor/backbone.js"></script>
+    <script src="./assets/js/vendor/backbone.localStorage.js"></script>
     <script src="./assets/js/vendor/backbone.marionette.js"></script>
     <script src="./assets/js/vendor/bootstrap.js"></script>
-
+    <script src="./assets/js/vendor/spin.js"></script>
+    <script src="./assets/js/vendor/spin.jquery.js"></script>
 
     <script src="./assets/js/app.js"></script>
-    <script src="./assets/js/entities/contact.js"></script>
     <script src="./assets/js/apps/config/storage/localstorage.js"></script>
+    <script src="./assets/js/entities/contact.js"></script>
+    <script src="./assets/js/common/views.js"></script>
     <script src="./assets/js/apps/contacts/contacts_app.js"></script>
     <script src="./assets/js/apps/contacts/list/list_view.js"></script>
     <script src="./assets/js/apps/contacts/list/list_controller.js"></script>
