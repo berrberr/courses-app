@@ -8,12 +8,18 @@ Backbone, Marionette, $, _) {
     template: "#contact-view",
 
     events: {
-      "click a.js-back": "listContactsClicked"
+      "click a.js-back": "listContactsClicked",
+      "click a.js-edit": "editClicked"
     },
 
     listContactsClicked: function(e) {
       e.preventDefault();
       ContactManager.trigger("contacts:list");
+    },
+
+    editClicked: function(e) {
+      e.preventDefault();
+      this.trigger("contact:edit", this.model);
     }
   });
 });

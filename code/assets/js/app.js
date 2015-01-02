@@ -2,6 +2,7 @@ var ContactManager = new Marionette.Application();
 
 ContactManager.addRegions({
   mainRegion: "#main-region",
+  dialogRegion: "#dialog-region",
   summaryRegion: "#summary-region"
 });
 

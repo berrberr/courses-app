@@ -44,13 +44,15 @@ module.exports = function(grunt) {
         files: {
           "require.js": "requirejs/require.js",
           "jquery.js": "jquery/dist/jquery.js",
+          "jquery-ui.js": "jqueryui/jquery-ui.js",
           "underscore.js": "underscore/underscore.js",
           "json2.js": "json2/json2.js",
           "backbone.js": "backbone/backbone.js",
           "backbone.localStorage.js": "Backbone.localStorage/backbone.localStorage.js",
           "backbone.marionette.js": "marionette/lib/backbone.marionette.js",
           "bootstrap.js": "bootstrap-sass-official/assets/javascripts/bootstrap.js",
-          "spin.js": "spin.js/spin.js"
+          "spin.js": "spin.js/spin.js",
+          "backbone.syphon.js": "marionette.backbone.syphon/lib/backbone.syphon.js"
         }
       },
       sass: {
@@ -81,7 +83,7 @@ module.exports = function(grunt) {
     },
 
     watch: {
-      files: [jsFiles, sassFiles, htmlFiles],
+      files: ["code/assets/js/**/*.js", "!code/assets/js/vendor/*", sassFiles, htmlFiles],
       tasks: ["dev"]
     },
 

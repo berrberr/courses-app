@@ -4,6 +4,7 @@
     <meta charse="utf-8">
     <title>Backbone/Marionette test app</title>
     <link rel="stylesheet" type="text/css" href="./assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/vendor/jquery-ui-bootstrap/jquery-ui-1.10.0.custom.css">
   </head>
 
   <body>
@@ -30,16 +31,15 @@
 
     <div id="main-region" class="container"></div>
     <div id="summary-region" class="container"></div>
+    <div id="dialog-region"></div>
 
-    <script type="text/template" id="missing-contact-view">
-      <h1>Error</h1>
-      <div class="alert alert-danger">This contact was not found.</div>
+    <script type="text/template" id="contact-list-layout">
+      <div id="panel-region"></div>
+      <div id="contacts-region"></div>
     </script>
 
-    <script type="text/template" id="contact-view">
-      <h1><%- firstName %> <%- lastName %></h1>
-      <p><strong>Phone number: </strong> <%- phoneNumber %></p>
-      <p><a href="#contacts" class="js-back">Back to contact list.</a></p>
+    <script type="text/template" id="contact-list-panel">
+      <button class="btn btn-primary js-new">New contact</button>
     </script>
 
     <script type="text/template" id="contact-list">
@@ -58,15 +58,62 @@
           <i class="glyphicon glyphicon-eye-open"></i>
           Show
         </a>
+        <a href="#contacts/<%- id %>/edit" class="btn btn-info js-edit">
+          <i class="glyphicon glyphicon-pencil"></i>
+          Edit
+        </a>
         <button class="btn btn-danger js-delete">
           <i class="glyphicon glyphicon-remove"></i>
           Delete
         </button>
       </td>
     </script>
+    
+    <script type="text/template" id="missing-contact-view">
+      <h1>Error</h1>
+      <div class="alert alert-danger">This contact was not found.</div>
+    </script>
+
+    <script type="text/template" id="contact-view">
+      <h1><%- firstName %> <%- lastName %></h1>
+      <p>
+        <a href="#" class="btn btn-warning js-edit">
+          <i class="glyphicon glyphicon-edit"></i>
+          Edit this contact
+        </a>
+      </p>
+      <p><strong>Phone number: </strong> <%- phoneNumber %></p>
+      <p><a href="#contacts" class="js-back">Back to contact list.</a></p>
+    </script>
 
     <script type="text/template" id="loading-view">
+      <h1><%- title %></h1>
+      <p><%- message %></p>
       <div id="spinner" style="position: fixed; left: 50%; top: 30%;"></div>
+    </script>
+
+    <script type="text/template" id="contact-form">
+      <form>
+        <div class="form-group">
+          <label for="contact-firstName">
+          First name:</label>
+          <input id="contact-firstName" name="firstName"
+          type="text" value="<%- firstName %>" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="contact-lastName">
+          Last name:</label>
+          <input id="contact-lastName" name="lastName"
+          type="text" value="<%- lastName %>" class="form-control"/>
+        </div>
+        <div class="form-group">
+          <label for="contact-phoneNumber">
+          Phone number:</label>
+          <input id="contact-phoneNumber" name="phoneNumber"
+          type="text" value="<%- phoneNumber %>" class="form-control"/>
+        </div>
+        <button class="btn btn-default js-submit">Save</button>
+      </form>
     </script>
 
     <script src="./assets/js/vendor/jquery.js"></script>
@@ -75,7 +122,9 @@
     <script src="./assets/js/vendor/backbone.js"></script>
     <script src="./assets/js/vendor/backbone.localStorage.js"></script>
     <script src="./assets/js/vendor/backbone.marionette.js"></script>
+    <script src="./assets/js/vendor/backbone.syphon.js"></script>
     <script src="./assets/js/vendor/bootstrap.js"></script>
+    <script src="./assets/js/vendor/jquery-ui.js"></script>
     <script src="./assets/js/vendor/spin.js"></script>
     <script src="./assets/js/vendor/spin.jquery.js"></script>
 
@@ -84,10 +133,14 @@
     <script src="./assets/js/entities/contact.js"></script>
     <script src="./assets/js/common/views.js"></script>
     <script src="./assets/js/apps/contacts/contacts_app.js"></script>
+    <script src="./assets/js/apps/contacts/common/views.js"></script>
     <script src="./assets/js/apps/contacts/list/list_view.js"></script>
     <script src="./assets/js/apps/contacts/list/list_controller.js"></script>
     <script src="./assets/js/apps/contacts/show/show_view.js"></script>
     <script src="./assets/js/apps/contacts/show/show_controller.js"></script>
+    <script src="./assets/js/apps/contacts/edit/edit_view.js"></script>
+    <script src="./assets/js/apps/contacts/edit/edit_controller.js"></script>
+    <script src="./assets/js/apps/contacts/new/new_view.js"></script>
 
     <script type="text/javascript">
       ContactManager.start();
