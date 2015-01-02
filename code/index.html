@@ -40,6 +40,14 @@
 
     <script type="text/template" id="contact-list-panel">
       <button class="btn btn-primary js-new">New contact</button>
+      <form id="filter-form" class="form-search form-inline pull-right">
+        <div class="input-group">
+          <input type="text" class="form-control js-filter-criterion">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Filter contacts</button>
+          </span>
+        </div>
+      </form>
     </script>
 
     <script type="text/template" id="contact-list">
@@ -68,7 +76,7 @@
         </button>
       </td>
     </script>
-    
+
     <script type="text/template" id="missing-contact-view">
       <h1>Error</h1>
       <div class="alert alert-danger">This contact was not found.</div>
@@ -128,8 +136,10 @@
     <script src="./assets/js/vendor/spin.js"></script>
     <script src="./assets/js/vendor/spin.jquery.js"></script>
 
+    <script src="./assets/js/apps/config/marionette/regions/dialog.js"> </script>
     <script src="./assets/js/app.js"></script>
     <script src="./assets/js/apps/config/storage/localstorage.js"></script>
+    <script src="./assets/js/entities/common.js"></script>
     <script src="./assets/js/entities/contact.js"></script>
     <script src="./assets/js/common/views.js"></script>
     <script src="./assets/js/apps/contacts/contacts_app.js"></script>

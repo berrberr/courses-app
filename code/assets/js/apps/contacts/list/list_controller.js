@@ -20,12 +20,15 @@ Backbone, Marionette, $, _) {
           contactsListLayout.contactsRegion.show(contactsListView);
         });
 
+        contactsListPanel.on("contacts:filter", function(filterCriterion) {
+          console.log("filter: ", filterCriterion);
+        });
+
         contactsListPanel.on("contact:new", function() {
           var newContact = new ContactManager.Entities.Contact();
 
           var view = new ContactManager.ContactsApp.New.Contact({
-            model: newContact,
-            asModal: true
+            model: newContact
           });
 
           view.on("form:submit", function(data) {
@@ -38,7 +41,7 @@ Backbone, Marionette, $, _) {
 
             if(newContact.save(data)) {
               contacts.add(newContact);
-              ContactManager.dialogRegion.empty();
+              view.trigger("dialog:close");
               contactsListView.children.findByModel(newContact).flash("success");
             } else {
               view.triggerMethod("form:data:invalid", newContact.validationError);
@@ -48,20 +51,20 @@ Backbone, Marionette, $, _) {
           ContactManager.dialogRegion.show(view);
         });
 
-        contactsListView.on("childview:contact:show", function(childView, model) {
-          ContactManager.trigger("contact:show", model.get("id"));
+        contactsListView.on("childview:contact:show", function(childView, args) {
+          ContactManager.trigger("contact:show", args.model.get("id"));
         });
 
-        contactsListView.on("childview:contact:edit", function(childView, model) {
+        contactsListView.on("childview:contact:edit", function(childView, args) {
+          var model = args.model;
           var view = new ContactManager.ContactsApp.Edit.Contact({
-            model: model,
-            asModal: true
+            model: model
           });
 
           view.on("form:submit", function(data) {
             if(model.save(data)) {
               childView.render();
-              ContactManager.dialogRegion.empty();
+              view.trigger("dialog:close");
               childView.flash("success");
             } else {
               view.triggerMethod("form:data:invalid", model.validationError);
@@ -71,8 +74,8 @@ Backbone, Marionette, $, _) {
           ContactManager.dialogRegion.show(view);
         });
 
-        contactsListView.on("childview:contact:delete", function(childView, model) {
-          model.destroy();
+        contactsListView.on("childview:contact:delete", function(childView, args) {
+          args.model.destroy();
         });
 
         contactsListView.on("childview:contact:logInfo", function(childView, model) {

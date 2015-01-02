@@ -14,6 +14,16 @@ Backbone, Marionette, $, _) {
 
     triggers: {
       "click button.js-new": "contact:new"
+    },
+
+    events: {
+      "submit #filter-form": "filterContacts"
+    },
+
+    filterContacts: function(e) {
+      e.preventDefault();
+      var criterion = this.$(".js-filter-criterion").val();
+      this.trigger("contacts:filter", criterion);
     }
   });
 
@@ -21,33 +31,19 @@ Backbone, Marionette, $, _) {
     tagName: "tr",
     template: "#contact-list-item",
 
+    triggers: {
+      "click td a.js-show": "contact:show",
+      "click td a.js-edit": "contact:edit",
+      "click td button.js-delete": "contact:delete"
+    },
+
     events: {
-      "click": "highlightName",
-      "click td a.js-show": "showClicked",
-      "click td a.js-edit": "editClicked",
-      "click td button.js-delete": "deleteClicked"
+      "click": "highlightName"
     },
 
     highlightName: function(e) {
       this.$el.toggleClass("warning");
       this.trigger("contact:logInfo", this.model);
-    },
-
-    showClicked: function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.trigger("contact:show", this.model);
-    },
-
-    editClicked: function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      this.trigger("contact:edit", this.model);
-    },
-
-    deleteClicked: function(e) {
-      e.stopPropagation();
-      this.trigger("contact:delete", this.model);
     },
 
     remove: function() {
@@ -73,6 +69,20 @@ Backbone, Marionette, $, _) {
     template: "#contact-list",
     childView: List.Contact,
     childViewContainer: "tbody",
+
+    initialize: function() {
+      this.listenTo(this.collection, "reset", function() {
+        this.attachHtml = function(collectionView, childView, index) {
+          collectionView.$el.append(childView.el);
+        };
+      });
+    },
+
+    onRenderCollection: function() {
+      this.attachHtml = function(collectionView, childView, index) {
+        collectionView.$el.prepend(childView.el);
+      };
+    },
 
     onChildviewContactDelete: function() {
       this.$el.fadeOut(100, function() {
