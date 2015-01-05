@@ -8,7 +8,12 @@
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div id="header-region"></div>
+    <div id="main-region" class="container"></div>
+    <div id="summary-region" class="container"></div>
+    <div id="dialog-region"></div>
+
+    <script type="text/template" id="header-template">
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -17,21 +22,18 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="index.html">Contact Manager</a>
+          <a class="navbar-brand brand" href="index.html">Contact Manager</a>
         </div>
 
         <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#about">About</a></li>
-            <li><a href="#">Contacts</a></li>
-          </ul>
+          <ul class="nav navbar-nav"></ul>
         </div>
       </div>
-    </div>
+    </script>
 
-    <div id="main-region" class="container"></div>
-    <div id="summary-region" class="container"></div>
-    <div id="dialog-region"></div>
+    <script type="text/template" id="header-link">
+      <a href="#<%- url %>"><%- name %></a>
+    </script>
 
     <script type="text/template" id="contact-list-layout">
       <div id="panel-region"></div>
@@ -127,7 +129,7 @@
         <button class="btn btn-default js-submit">Save</button>
       </form>
     </script>
-  
+
     <script type="text/template" id="about-message">
       <h1>About this application</h1>
       <p>Simple subapp to display about page.</p>
@@ -140,6 +142,7 @@
     <script src="./assets/js/vendor/backbone.localStorage.js"></script>
     <script src="./assets/js/vendor/backbone.marionette.js"></script>
     <script src="./assets/js/vendor/backbone.syphon.js"></script>
+    <script src="./assets/js/vendor/backbone.picky.js"></script>
     <script src="./assets/js/vendor/bootstrap.js"></script>
     <script src="./assets/js/vendor/jquery-ui.js"></script>
     <script src="./assets/js/vendor/spin.js"></script>
@@ -150,6 +153,7 @@
     <script src="./assets/js/apps/config/storage/localstorage.js"></script>
     <script src="./assets/js/entities/common.js"></script>
     <script src="./assets/js/entities/contact.js"></script>
+    <script src="./assets/js/entities/header.js"></script>
     <script src="./assets/js/common/views.js"></script>
     <script src="./assets/js/apps/about/about_app.js"></script>
     <script src="./assets/js/apps/about/show/show_view.js"></script>
@@ -163,6 +167,9 @@
     <script src="./assets/js/apps/contacts/edit/edit_view.js"></script>
     <script src="./assets/js/apps/contacts/edit/edit_controller.js"></script>
     <script src="./assets/js/apps/contacts/new/new_view.js"></script>
+    <script src="./assets/js/apps/header/header_app.js"></script>
+    <script src="./assets/js/apps/header/list/list_view.js"></script>
+    <script src="./assets/js/apps/header/list/list_controller.js"></script>
 
     <script type="text/javascript">
       ContactManager.start();

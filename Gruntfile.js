@@ -50,6 +50,7 @@ module.exports = function(grunt) {
           "backbone.js": "backbone/backbone.js",
           "backbone.localStorage.js": "Backbone.localStorage/backbone.localStorage.js",
           "backbone.marionette.js": "marionette/lib/backbone.marionette.js",
+          "backbone.picky.js": "backbone.picky/lib/backbone.picky.js",
           "bootstrap.js": "bootstrap-sass-official/assets/javascripts/bootstrap.js",
           "spin.js": "spin.js/spin.js",
           "backbone.syphon.js": "marionette.backbone.syphon/lib/backbone.syphon.js"

@@ -1,4 +1,4 @@
-ContactManager.module("AboutApp", function(AboutApp, ContactManager, 
+ContactManager.module("AboutApp", function(AboutApp, ContactManager,
 Backbone, Marionette, $, _){
   AboutApp.Router = Marionette.AppRouter.extend({
     appRoutes: {
@@ -9,6 +9,7 @@ Backbone, Marionette, $, _){
   var API = {
     showAbout: function() {
       AboutApp.Show.Controller.showAbout();
+      ContactManager.execute("set:active:header", "about");
     }
   };
 
