@@ -22,8 +22,8 @@
 
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Test link</a></li>
-            <li><a href="#">Test link 2</a></li>
+            <li class="active"><a href="#about">About</a></li>
+            <li><a href="#">Contacts</a></li>
           </ul>
         </div>
       </div>
@@ -77,6 +77,10 @@
       </td>
     </script>
 
+    <script type="text/template" id="contact-list-none">
+      <td colspan="3">No contacts to display.</td>
+    </script>
+
     <script type="text/template" id="missing-contact-view">
       <h1>Error</h1>
       <div class="alert alert-danger">This contact was not found.</div>
@@ -123,6 +127,11 @@
         <button class="btn btn-default js-submit">Save</button>
       </form>
     </script>
+  
+    <script type="text/template" id="about-message">
+      <h1>About this application</h1>
+      <p>Simple subapp to display about page.</p>
+    </script>
 
     <script src="./assets/js/vendor/jquery.js"></script>
     <script src="./assets/js/vendor/underscore.js"></script>
@@ -142,6 +151,9 @@
     <script src="./assets/js/entities/common.js"></script>
     <script src="./assets/js/entities/contact.js"></script>
     <script src="./assets/js/common/views.js"></script>
+    <script src="./assets/js/apps/about/about_app.js"></script>
+    <script src="./assets/js/apps/about/show/show_view.js"></script>
+    <script src="./assets/js/apps/about/show/show_controller.js"></script>
     <script src="./assets/js/apps/contacts/contacts_app.js"></script>
     <script src="./assets/js/apps/contacts/common/views.js"></script>
     <script src="./assets/js/apps/contacts/list/list_view.js"></script>

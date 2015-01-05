@@ -20,10 +20,18 @@ Backbone, Marionette, $, _) {
       "submit #filter-form": "filterContacts"
     },
 
+    ui: {
+      criterion: "input.js-filter-criterion"
+    },
+
     filterContacts: function(e) {
       e.preventDefault();
       var criterion = this.$(".js-filter-criterion").val();
       this.trigger("contacts:filter", criterion);
+    },
+
+    onSetFilterCriterion: function(criterion) {
+      this.ui.criterion.val(criterion);
     }
   });
 
@@ -63,11 +71,19 @@ Backbone, Marionette, $, _) {
     }
   });
 
+  // Empty view for contacts list
+  var noContactsView = Marionette.ItemView.extend({
+    template: "#contact-list-none",
+    tagName: "tr",
+    className: "warning"
+  });
+
   List.Contacts = Marionette.CompositeView.extend({
     tagName: "table",
     className: "table table-hover",
     template: "#contact-list",
     childView: List.Contact,
+    emptyView: noContactsView,
     childViewContainer: "tbody",
 
     initialize: function() {
